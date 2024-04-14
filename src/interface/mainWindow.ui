@@ -151,7 +151,7 @@
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
-                     <height>30</height>
+                     <height>35</height>
                     </size>
                    </property>
                    <property name="readOnly">
@@ -167,7 +167,7 @@
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
-                     <height>30</height>
+                     <height>35</height>
                     </size>
                    </property>
                    <property name="readOnly">
@@ -244,7 +244,7 @@
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
-                     <height>30</height>
+                     <height>35</height>
                     </size>
                    </property>
                    <property name="readOnly">
@@ -260,7 +260,7 @@
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
-                     <height>30</height>
+                     <height>35</height>
                     </size>
                    </property>
                    <property name="readOnly">
@@ -309,7 +309,7 @@
              <x>0</x>
              <y>0</y>
              <width>1072</width>
-             <height>362</height>
+             <height>352</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">

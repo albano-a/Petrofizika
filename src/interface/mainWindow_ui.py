@@ -109,14 +109,14 @@ class Ui_MainWindow(object):
 
         self.resultWylliePerc = QTextEdit(self.groupBox)
         self.resultWylliePerc.setObjectName(u"resultWylliePerc")
-        self.resultWylliePerc.setMaximumSize(QSize(16777215, 30))
+        self.resultWylliePerc.setMaximumSize(QSize(16777215, 35))
         self.resultWylliePerc.setReadOnly(True)
 
         self.verticalLayout_4.addWidget(self.resultWylliePerc)
 
         self.resultWyllieDec = QTextEdit(self.groupBox)
         self.resultWyllieDec.setObjectName(u"resultWyllieDec")
-        self.resultWyllieDec.setMaximumSize(QSize(16777215, 30))
+        self.resultWyllieDec.setMaximumSize(QSize(16777215, 35))
         self.resultWyllieDec.setReadOnly(True)
 
         self.verticalLayout_4.addWidget(self.resultWyllieDec)
@@ -162,14 +162,14 @@ class Ui_MainWindow(object):
 
         self.resultRaymerPerc = QTextEdit(self.groupBox_2)
         self.resultRaymerPerc.setObjectName(u"resultRaymerPerc")
-        self.resultRaymerPerc.setMaximumSize(QSize(16777215, 30))
+        self.resultRaymerPerc.setMaximumSize(QSize(16777215, 35))
         self.resultRaymerPerc.setReadOnly(True)
 
         self.verticalLayout_5.addWidget(self.resultRaymerPerc)
 
         self.resultRaymerDec = QTextEdit(self.groupBox_2)
         self.resultRaymerDec.setObjectName(u"resultRaymerDec")
-        self.resultRaymerDec.setMaximumSize(QSize(16777215, 30))
+        self.resultRaymerDec.setMaximumSize(QSize(16777215, 35))
         self.resultRaymerDec.setReadOnly(True)
 
         self.verticalLayout_5.addWidget(self.resultRaymerDec)
@@ -202,7 +202,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1072, 362))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1072, 352))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(2, 2, 2, 2)

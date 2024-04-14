@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QMenu,
     QProgressDialog
 )
+from qt_material import apply_stylesheet
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
 import pandas as pd
@@ -107,6 +108,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 
             # Create a DataFrame from the QTableWidget
             data = []
+            headers = [self.outputTableSonicPorosity.horizontalHeaderItem(i).text()\
+                for i in range(self.outputTableSonicPorosity.columnCount())]
             for row in range(self.outputTableSonicPorosity.rowCount()):
                 row_data = []
                 for column in range(self.outputTableSonicPorosity.columnCount()):
@@ -117,7 +120,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         row_data.append('')
                 data.append(row_data)
             
-            df = pd.DataFrame(data)
+            df = pd.DataFrame(data, columns=headers)
             
             # Create a QProgressDialog
             progress = QProgressDialog("Saving...", "Cancel", 0, 100, self)
@@ -132,6 +135,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
      
 def main():
     app = QApplication(sys.argv)
+    apply_stylesheet(
+        app, 
+        theme='light_petro.xml', 
+        invert_secondary=True,
+        extra={
+            'font_family': 'Roboto',
+            })
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

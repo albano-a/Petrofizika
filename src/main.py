@@ -7,12 +7,11 @@ from PySide6.QtWidgets import (
     QMenu,
     QProgressDialog
 )
-from qt_material import apply_stylesheet
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
 import pandas as pd
 from interface.mainWindow_ui import Ui_MainWindow
-from functions.porosity import porosity as poro
+from functions.porosity.porosities import Sonic
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -21,60 +20,57 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Petrofizika")
         
-        self.calculateWylliePorosity.clicked.connect(self.calculate_wyllie_porosity)
-        self.calculateRaymerPorosity.clicked.connect(self.calculate_raymer_porosity)
-        self.addTableWyllie.clicked.connect(self.add_table_wyllie)
-        self.addTableRaymer.clicked.connect(self.add_table_raymer)
+        self.calculateWylliePorosity.clicked.connect(
+            lambda: self.calculate_porosity_sonic('wyllie')
+        )
+        self.calculateRaymerPorosity.clicked.connect(
+            lambda: self.calculate_porosity_sonic('raymer')
+        )
+        self.addTableWyllie.clicked.connect(
+            lambda: self.add_table_sonic('wyllie')
+        )
+        self.addTableRaymer.clicked.connect(
+            lambda: self.add_table_sonic('raymer')
+        )
         self.exportSonicPorosityTable.clicked.connect(self.export_table)
         
-    def calculate_wyllie_porosity(self):
+    def calculate_porosity_sonic(self, model):
         t_log = float(self.inputDeltaTlog_wyllie.text())
         t_ma = float(self.inputDeltaTma_wyllie.text())
         t_fl = float(self.inputDeltaTfl_wyllie.text())
         
-        w, perc_w = poro.porosity_wyllie(t_log, t_ma, t_fl)
-        self.resultWyllieDec.setText(f"{w:.4f}")
-        self.resultWylliePerc.setText(f"{perc_w:.2f}%")
+        sonic = Sonic(t_log, t_ma, t_fl)
+        if model == 'wyllie':
+            porosity, perc_porosity = sonic.porosity_wyllie()
+            self.resultWyllieDec.setText(f"{porosity:.4f}")
+            self.resultWylliePerc.setText(f"{perc_porosity:.2f}%")
+        elif model == 'raymer':
+            porosity, perc_porosity = sonic.porosity_raymer()
+            self.resultRaymerDec.setText(f"{porosity:.4f}")
+            self.resultRaymerPerc.setText(f"{perc_porosity:.2f}%")
         
-    def calculate_raymer_porosity(self):
-        t_log = float(self.inputDeltaTlog_raymer.text())
-        t_ma = float(self.inputDeltaTma_raymer.text())
-        
-        r, perc_r = poro.porosity_raymer(t_log, t_ma)
-        self.resultRaymerDec.setText(f"{r:.4f}")
-        self.resultRaymerPerc.setText(f"{perc_r:.2f}%")
-        
-    def add_table_wyllie(self):
+    def add_table_sonic(self, model):
         t_log = float(self.inputDeltaTlog_wyllie.text())
         t_ma = float(self.inputDeltaTma_wyllie.text())
-        t_fl = float(self.inputDeltaTfl_wyllie.text())
-        
-        w, perc_w = poro.porosity_wyllie(t_log, t_ma, t_fl)
-        
-        headers = ["Tlog", "Tma", "Tfl", "Porosity", "Porosity (%)"]
+        sonic = Sonic(t_log, t_ma)
+
+        if model == 'wyllie': 
+            t_fl = float(self.inputDeltaTfl_wyllie.text())
+            sonic.t_fl = t_fl
+            porosity, perc_porosity = sonic.porosity_wyllie()
+            headers = ["Tlog", "Tma", "Tfl", "Porosity", "Porosity (%)"]
+            values = [t_log, t_ma, t_fl, f"{porosity:.4f}", f"{perc_porosity:.2f}%"]
+            
+        elif model == 'raymer':
+            porosity, perc_porosity = sonic.porosity_raymer()
+            headers = ["Tlog", "Tma", "Porosity", "Porosity (%)"]
+            values = [t_log, t_ma, f"{porosity:.4f}", f"{perc_porosity:.2f}%"]
+
         self.outputTableSonicPorosity.setHorizontalHeaderLabels(headers)
-        
         currentRowCount = self.outputTableSonicPorosity.rowCount()
         self.outputTableSonicPorosity.setRowCount(currentRowCount + 1)
-        self.outputTableSonicPorosity.setColumnCount(5)
-        
-        values = [t_log, t_ma, t_fl, f"{w:.4f}", f"{perc_w:.2f}%"]
-        for i, value in enumerate(values):
-            self.outputTableSonicPorosity.setItem(currentRowCount, i, QTableWidgetItem(str(value)))
-        
-    def add_table_raymer(self):
-        t_log = float(self.inputDeltaTlog_raymer.text())
-        t_ma = float(self.inputDeltaTma_raymer.text())
-        
-        r, perc_r = poro.porosity_raymer(t_log, t_ma)
-        
-        headers = ["Tlog", "Tma", "Porosity", "Porosity (%)"]
-        self.outputTableSonicPorosity.setHorizontalHeaderLabels(headers)
-        
-        currentRowCount = self.outputTableSonicPorosity.rowCount()
-        self.outputTableSonicPorosity.setRowCount(currentRowCount + 1)
-        self.outputTableSonicPorosity.setColumnCount(4)
-        values = [t_log, t_ma, f"{r:.4f}", f"{perc_r:.2f}%"]
+        self.outputTableSonicPorosity.setColumnCount(len(headers))
+
         for i, value in enumerate(values):
             self.outputTableSonicPorosity.setItem(currentRowCount, i, QTableWidgetItem(str(value)))
         
@@ -135,13 +131,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
      
 def main():
     app = QApplication(sys.argv)
-    apply_stylesheet(
-        app, 
-        theme='light_petro.xml', 
-        invert_secondary=True,
-        extra={
-            'font_family': 'Roboto',
-            })
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

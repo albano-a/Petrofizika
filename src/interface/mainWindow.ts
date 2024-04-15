@@ -131,52 +131,142 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Distance&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="526"/>
-        <location filename="mainWindow.ui" line="563"/>
+        <location filename="mainWindow.ui" line="530"/>
+        <location filename="mainWindow.ui" line="567"/>
         <source>Pés</source>
         <translation>Feet</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="531"/>
-        <location filename="mainWindow.ui" line="568"/>
+        <location filename="mainWindow.ui" line="535"/>
+        <location filename="mainWindow.ui" line="572"/>
         <source>Metros</source>
         <translatorcomment>Measurement of distance</translatorcomment>
         <translation>Meters</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="536"/>
-        <location filename="mainWindow.ui" line="573"/>
+        <location filename="mainWindow.ui" line="540"/>
+        <location filename="mainWindow.ui" line="577"/>
         <source>Milhas</source>
         <translation>Miles</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="541"/>
-        <location filename="mainWindow.ui" line="578"/>
+        <location filename="mainWindow.ui" line="545"/>
+        <location filename="mainWindow.ui" line="582"/>
         <source>Quilômetros</source>
         <translation>Kilometers</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="549"/>
-        <location filename="mainWindow.ui" line="607"/>
-        <location filename="mainWindow.ui" line="651"/>
-        <location filename="mainWindow.ui" line="685"/>
+        <location filename="mainWindow.ui" line="553"/>
+        <location filename="mainWindow.ui" line="631"/>
+        <location filename="mainWindow.ui" line="729"/>
+        <location filename="mainWindow.ui" line="796"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;PARA&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;FOR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="590"/>
+        <location filename="mainWindow.ui" line="594"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Área&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Area&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="644"/>
+        <location filename="mainWindow.ui" line="608"/>
+        <location filename="mainWindow.ui" line="655"/>
+        <source>Acres</source>
+        <translation>Acres</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="613"/>
+        <location filename="mainWindow.ui" line="660"/>
+        <source>Pés quadrados</source>
+        <translation>Sqaure feet</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="618"/>
+        <location filename="mainWindow.ui" line="665"/>
+        <source>Metros quadrados</source>
+        <translation>Square meters</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="623"/>
+        <location filename="mainWindow.ui" line="670"/>
+        <source>Quilômetros quadrados</source>
+        <translation>Square kilometers</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="689"/>
+        <location filename="mainWindow.ui" line="759"/>
+        <source>Pés cúbicos por Acre</source>
+        <translation>Acre-feet</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="694"/>
+        <location filename="mainWindow.ui" line="764"/>
+        <source>Barris</source>
+        <translation>Barrels</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="699"/>
+        <location filename="mainWindow.ui" line="769"/>
+        <source>Pés cúbicos</source>
+        <translation>Cubic feet</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="704"/>
+        <location filename="mainWindow.ui" line="774"/>
+        <source>Metros cúbicos</source>
+        <translation>Cubic meters</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="709"/>
+        <location filename="mainWindow.ui" line="779"/>
+        <source>Galões</source>
+        <translation>Gallons</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="714"/>
+        <location filename="mainWindow.ui" line="784"/>
+        <source>Toneladas métricas</source>
+        <translation>Metric tons</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="722"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Volume&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Volume&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mainWindow.ui" line="698"/>
+        <location filename="mainWindow.ui" line="813"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Pressão&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Pressure&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="827"/>
+        <location filename="mainWindow.ui" line="862"/>
+        <source>PSIA</source>
+        <translation>PSIA</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="832"/>
+        <location filename="mainWindow.ui" line="867"/>
+        <source>kPa - Kilopascal</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="837"/>
+        <location filename="mainWindow.ui" line="872"/>
+        <source>Bar</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="842"/>
+        <location filename="mainWindow.ui" line="877"/>
+        <source>BTU - Unidade Térmica Britânica</source>
+        <translation>BTU</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="847"/>
+        <location filename="mainWindow.ui" line="882"/>
+        <source>Joules</source>
+        <translation>Joules</translation>
     </message>
 </context>
 </TS>

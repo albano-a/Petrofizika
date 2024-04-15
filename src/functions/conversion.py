@@ -1,8 +1,12 @@
+"""
+This module contains a class that provides methods for 
+converting units of measurement in the gas industry.
+"""
 import numpy as np
 from PySide6.QtWidgets import QMessageBox
 
 
-class Conversion_gas_industry:
+class ConversionOilGasIndustry:
     def __init__(self) -> None:
         pass
     

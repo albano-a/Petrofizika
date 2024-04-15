@@ -11,8 +11,17 @@ from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
 import pandas as pd
 from interface.mainWindow_ui import Ui_MainWindow
-from functions.porosity import Sonic, Density, Resistivity, ShaleCorrected
-from functions.conversion import Conversion_gas_industry
+from functions.porosity import (
+    Sonic, 
+    Density, 
+    Resistivity, 
+    ShaleCorrected
+)
+from functions.permeability import Permeability
+from functions.resistivity import Resistivity
+from functions.shale_volume import ShaleVolume
+from functions.conversion import ConversionOilGasIndustry
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -44,8 +53,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             lambda: self.calculate_porosity_density('neutron-density')
         )
         
+        ## Shale Volume
+        self.methodSPInput.currentTextChanged.connect(self.updateSPInputState)
+        self.calculateShaleVolumeGeneral.clicked.connect(
+            lambda: self.calculate_shale_volume('general')
+        )
+        self.calculateShaleVolumeSP.clicked.connect(
+            lambda: self.calculate_shale_volume('sp')
+        )
+        
+        
         ### Conversions
-        self.conversion = Conversion_gas_industry()
+        self.conversion = ConversionOilGasIndustry()
         self.fromDistanceInput.textChanged.connect(self.conversionDistance)
         self.fromAreaInput.textChanged.connect(self.conversionArea)
         self.fromVolumeInput.textChanged.connect(self.conversionVolume)
@@ -152,6 +171,46 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.resultNeutronDensityPorosityDec.setText(f"{nd_porosity:.4f}")
             self.resultNeutronDensityPorositPerc.setText(f"{nd_perc_porosity:.2f}%")
             
+    def calculate_shale_volume(self, method):
+        from dicts.dicts import shale_methods
+        shale_volume = ShaleVolume()
+        
+        if method == 'general':
+            gr_log = float(self.GRlogInput.text())
+            gr_min = float(self.GRminInput.text())
+            gr_max = float(self.GRmaxInput.text())
+            igr = shale_volume.gamma_ray_index(gr_log, gr_min, gr_max)[0]
+            self.outputIGR.setText(f"{igr:.4f}")
+            
+            model = self.shaleVolumeMethodInput.currentText()
+            
+            model = shale_methods[model]
+            
+            vsh, vsh_perc = shale_volume.shale_volume(model)
+            self.shaleVolumeOutputDec.setText(f"{vsh:.4f}")
+            self.shaleVolumeOutputPerc.setText(f"{vsh_perc:.2f}%")
+            
+        elif method == 'sp':
+            psp = float(self.PSPInput.text())
+            ssp = float(self.SSPInput.text())
+            method = self.methodSPInput.currentText().lower()
+            if method == 'standard':
+                vsh, vsh_perc = shale_volume.shale_volume_sp(psp, ssp, method)
+                self.spOutputDec.setText(f"{vsh:.4f}")
+                self.spOutputPerc.setText(f"{vsh_perc:.2f}%")
+            elif method == 'alternative':
+                sp_sh = float(self.SPshaleInput.text())
+                vsh, vsh_perc = shale_volume.shale_volume_sp(psp, ssp, method, sp_sh)
+                self.spOutputDec.setText(f"{vsh:.4f}")
+                self.spOutputPerc.setText(f"{vsh_perc:.2f}%")
+    
+    def updateSPInputState(self, currentText):
+        if currentText.lower() == 'alternative':
+            self.SPshaleLabel.setEnabled(True)
+            self.SPshaleInput.setEnabled(True)
+        else:
+            self.SPshaleLabel.setEnabled(False)
+            self.SPshaleInput.setEnabled(False)
         
         
     def add_table_sonic(self, model):

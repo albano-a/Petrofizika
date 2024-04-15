@@ -19,14 +19,14 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
     QGroupBox, QHBoxLayout, QHeaderView, QLabel,
     QLineEdit, QMainWindow, QMenuBar, QPushButton,
     QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
-    QTextEdit, QVBoxLayout, QWidget)
+    QStatusBar, QTabWidget, QTableView, QTableWidget,
+    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(959, 784)
+        MainWindow.resize(959, 787)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -399,7 +399,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 915, 300))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 915, 303))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(2, 2, 2, 2)
@@ -431,6 +431,248 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_5 = QWidget()
         self.tab_5.setObjectName(u"tab_5")
+        self.verticalLayout_9 = QVBoxLayout(self.tab_5)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.groupBox_31 = QGroupBox(self.tab_5)
+        self.groupBox_31.setObjectName(u"groupBox_31")
+        self.gridLayout_4 = QGridLayout(self.groupBox_31)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.groupBox_5 = QGroupBox(self.groupBox_31)
+        self.groupBox_5.setObjectName(u"groupBox_5")
+        sizePolicy1.setHeightForWidth(self.groupBox_5.sizePolicy().hasHeightForWidth())
+        self.groupBox_5.setSizePolicy(sizePolicy1)
+        self.verticalLayout_11 = QVBoxLayout(self.groupBox_5)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.gridLayout_13 = QGridLayout()
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.label_24 = QLabel(self.groupBox_5)
+        self.label_24.setObjectName(u"label_24")
+
+        self.gridLayout_13.addWidget(self.label_24, 0, 0, 1, 1, Qt.AlignRight)
+
+        self.methodSPInput = QComboBox(self.groupBox_5)
+        self.methodSPInput.addItem("")
+        self.methodSPInput.addItem("")
+        self.methodSPInput.setObjectName(u"methodSPInput")
+
+        self.gridLayout_13.addWidget(self.methodSPInput, 0, 1, 1, 1)
+
+        self.label_25 = QLabel(self.groupBox_5)
+        self.label_25.setObjectName(u"label_25")
+
+        self.gridLayout_13.addWidget(self.label_25, 1, 0, 1, 1, Qt.AlignHCenter)
+
+        self.label_26 = QLabel(self.groupBox_5)
+        self.label_26.setObjectName(u"label_26")
+
+        self.gridLayout_13.addWidget(self.label_26, 1, 1, 1, 1, Qt.AlignHCenter)
+
+        self.SSPInput = QLineEdit(self.groupBox_5)
+        self.SSPInput.setObjectName(u"SSPInput")
+        self.SSPInput.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_13.addWidget(self.SSPInput, 2, 1, 1, 1)
+
+        self.PSPInput = QLineEdit(self.groupBox_5)
+        self.PSPInput.setObjectName(u"PSPInput")
+        self.PSPInput.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_13.addWidget(self.PSPInput, 2, 0, 1, 1)
+
+        self.spOutputPerc = QLineEdit(self.groupBox_5)
+        self.spOutputPerc.setObjectName(u"spOutputPerc")
+        self.spOutputPerc.setAlignment(Qt.AlignCenter)
+        self.spOutputPerc.setReadOnly(True)
+
+        self.gridLayout_13.addWidget(self.spOutputPerc, 6, 1, 1, 1)
+
+        self.spOutputDec = QLineEdit(self.groupBox_5)
+        self.spOutputDec.setObjectName(u"spOutputDec")
+        self.spOutputDec.setAlignment(Qt.AlignCenter)
+        self.spOutputDec.setReadOnly(True)
+
+        self.gridLayout_13.addWidget(self.spOutputDec, 6, 0, 1, 1)
+
+        self.SPshaleLabel = QLabel(self.groupBox_5)
+        self.SPshaleLabel.setObjectName(u"SPshaleLabel")
+        self.SPshaleLabel.setEnabled(False)
+
+        self.gridLayout_13.addWidget(self.SPshaleLabel, 3, 0, 1, 2, Qt.AlignHCenter)
+
+        self.calculateShaleVolumeSP = QPushButton(self.groupBox_5)
+        self.calculateShaleVolumeSP.setObjectName(u"calculateShaleVolumeSP")
+
+        self.gridLayout_13.addWidget(self.calculateShaleVolumeSP, 5, 0, 1, 2)
+
+        self.SPshaleInput = QLineEdit(self.groupBox_5)
+        self.SPshaleInput.setObjectName(u"SPshaleInput")
+        self.SPshaleInput.setEnabled(False)
+        self.SPshaleInput.setFont(font)
+        self.SPshaleInput.setStyleSheet(u"")
+        self.SPshaleInput.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_13.addWidget(self.SPshaleInput, 4, 0, 1, 2)
+
+
+        self.verticalLayout_11.addLayout(self.gridLayout_13)
+
+
+        self.gridLayout_4.addWidget(self.groupBox_5, 0, 1, 1, 1)
+
+        self.frame_3 = QFrame(self.groupBox_31)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_10 = QVBoxLayout(self.frame_3)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.gridLayout_12 = QGridLayout()
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
+        self.outputIGR = QLineEdit(self.frame_3)
+        self.outputIGR.setObjectName(u"outputIGR")
+        self.outputIGR.setFont(font)
+        self.outputIGR.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_12.addWidget(self.outputIGR, 7, 1, 1, 1)
+
+        self.label_13 = QLabel(self.frame_3)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setFont(font)
+
+        self.gridLayout_12.addWidget(self.label_13, 1, 0, 1, 1, Qt.AlignHCenter)
+
+        self.shaleVolumeMethodInput = QComboBox(self.frame_3)
+        self.shaleVolumeMethodInput.addItem("")
+        self.shaleVolumeMethodInput.addItem("")
+        self.shaleVolumeMethodInput.addItem("")
+        self.shaleVolumeMethodInput.addItem("")
+        self.shaleVolumeMethodInput.setObjectName(u"shaleVolumeMethodInput")
+        self.shaleVolumeMethodInput.setFont(font)
+        self.shaleVolumeMethodInput.setMinimumContentsLength(0)
+
+        self.gridLayout_12.addWidget(self.shaleVolumeMethodInput, 8, 1, 1, 1)
+
+        self.label_11 = QLabel(self.frame_3)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setFont(font)
+
+        self.gridLayout_12.addWidget(self.label_11, 8, 0, 1, 1, Qt.AlignRight)
+
+        self.calculateShaleVolumeGeneral = QPushButton(self.frame_3)
+        self.calculateShaleVolumeGeneral.setObjectName(u"calculateShaleVolumeGeneral")
+        self.calculateShaleVolumeGeneral.setFont(font)
+
+        self.gridLayout_12.addWidget(self.calculateShaleVolumeGeneral, 11, 0, 1, 2)
+
+        self.line_2 = QFrame(self.frame_3)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_12.addWidget(self.line_2, 5, 0, 1, 2)
+
+        self.GRlogInput = QLineEdit(self.frame_3)
+        self.GRlogInput.setObjectName(u"GRlogInput")
+        self.GRlogInput.setFont(font)
+        self.GRlogInput.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_12.addWidget(self.GRlogInput, 2, 0, 1, 1)
+
+        self.GRminInput = QLineEdit(self.frame_3)
+        self.GRminInput.setObjectName(u"GRminInput")
+        self.GRminInput.setFont(font)
+        self.GRminInput.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_12.addWidget(self.GRminInput, 2, 1, 1, 1)
+
+        self.label_14 = QLabel(self.frame_3)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setFont(font)
+        self.label_14.setMargin(0)
+        self.label_14.setIndent(-1)
+
+        self.gridLayout_12.addWidget(self.label_14, 1, 1, 1, 1, Qt.AlignHCenter)
+
+        self.label_22 = QLabel(self.frame_3)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setFont(font)
+
+        self.gridLayout_12.addWidget(self.label_22, 3, 0, 1, 2, Qt.AlignHCenter)
+
+        self.shaleVolumeOutputDec = QLineEdit(self.frame_3)
+        self.shaleVolumeOutputDec.setObjectName(u"shaleVolumeOutputDec")
+        self.shaleVolumeOutputDec.setFont(font)
+        self.shaleVolumeOutputDec.setAlignment(Qt.AlignCenter)
+        self.shaleVolumeOutputDec.setReadOnly(True)
+
+        self.gridLayout_12.addWidget(self.shaleVolumeOutputDec, 12, 0, 1, 1)
+
+        self.shaleVolumeOutputPerc = QLineEdit(self.frame_3)
+        self.shaleVolumeOutputPerc.setObjectName(u"shaleVolumeOutputPerc")
+        self.shaleVolumeOutputPerc.setFont(font)
+        self.shaleVolumeOutputPerc.setAlignment(Qt.AlignCenter)
+        self.shaleVolumeOutputPerc.setReadOnly(True)
+
+        self.gridLayout_12.addWidget(self.shaleVolumeOutputPerc, 12, 1, 1, 1)
+
+        self.GRmaxInput = QLineEdit(self.frame_3)
+        self.GRmaxInput.setObjectName(u"GRmaxInput")
+        self.GRmaxInput.setFont(font)
+        self.GRmaxInput.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_12.addWidget(self.GRmaxInput, 4, 0, 1, 2)
+
+        self.label_23 = QLabel(self.frame_3)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setFont(font)
+
+        self.gridLayout_12.addWidget(self.label_23, 7, 0, 1, 1, Qt.AlignRight)
+
+
+        self.verticalLayout_10.addLayout(self.gridLayout_12)
+
+
+        self.gridLayout_4.addWidget(self.frame_3, 0, 0, 1, 1)
+
+
+        self.verticalLayout_9.addWidget(self.groupBox_31)
+
+        self.pushButton_2 = QPushButton(self.tab_5)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setEnabled(False)
+
+        self.verticalLayout_9.addWidget(self.pushButton_2)
+
+        self.frame_4 = QFrame(self.tab_5)
+        self.frame_4.setObjectName(u"frame_4")
+        sizePolicy1.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
+        self.frame_4.setSizePolicy(sizePolicy1)
+        self.frame_4.setFrameShape(QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frame_4)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.scrollArea_2 = QScrollArea(self.frame_4)
+        self.scrollArea_2.setObjectName(u"scrollArea_2")
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_3 = QWidget()
+        self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 895, 321))
+        self.horizontalLayout_4 = QHBoxLayout(self.scrollAreaWidgetContents_3)
+        self.horizontalLayout_4.setSpacing(6)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(2, 2, 2, 2)
+        self.tableView = QTableView(self.scrollAreaWidgetContents_3)
+        self.tableView.setObjectName(u"tableView")
+        self.tableView.setEnabled(True)
+
+        self.horizontalLayout_4.addWidget(self.tableView)
+
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_3)
+
+        self.verticalLayout_12.addWidget(self.scrollArea_2)
+
+
+        self.verticalLayout_9.addWidget(self.frame_4)
+
         self.tabWidget.addTab(self.tab_5, "")
         self.tab_6 = QWidget()
         self.tab_6.setObjectName(u"tab_6")
@@ -444,7 +686,7 @@ class Ui_MainWindow(object):
         self.conversionScrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 915, 679))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 915, 682))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.gridLayout_7 = QGridLayout()
@@ -676,46 +918,86 @@ class Ui_MainWindow(object):
         self.label_2.setBuddy(self.inputDeltaTma_wyllie)
         self.label_6.setBuddy(self.inputDeltaTma_raymer)
         self.label_5.setBuddy(self.inputDeltaTlog_raymer)
+        self.label_24.setBuddy(self.methodSPInput)
+        self.label_25.setBuddy(self.PSPInput)
+        self.label_26.setBuddy(self.SSPInput)
+        self.SPshaleLabel.setBuddy(self.SPshaleInput)
+        self.label_13.setBuddy(self.GRlogInput)
+        self.label_11.setBuddy(self.shaleVolumeMethodInput)
+        self.label_14.setBuddy(self.GRminInput)
+        self.label_22.setBuddy(self.GRmaxInput)
+        self.label_23.setBuddy(self.outputIGR)
 #endif // QT_CONFIG(shortcut)
-        QWidget.setTabOrder(self.tabWidget, self.porosityTabWidget)
-        QWidget.setTabOrder(self.porosityTabWidget, self.inputDeltaTlog_wyllie)
         QWidget.setTabOrder(self.inputDeltaTlog_wyllie, self.inputDeltaTma_wyllie)
         QWidget.setTabOrder(self.inputDeltaTma_wyllie, self.inputDeltaTfl_wyllie)
         QWidget.setTabOrder(self.inputDeltaTfl_wyllie, self.calculateWylliePorosity)
         QWidget.setTabOrder(self.calculateWylliePorosity, self.resultWylliePerc)
         QWidget.setTabOrder(self.resultWylliePerc, self.resultWyllieDec)
         QWidget.setTabOrder(self.resultWyllieDec, self.addTableWyllie)
-        QWidget.setTabOrder(self.addTableWyllie, self.scrollArea)
-        QWidget.setTabOrder(self.scrollArea, self.inputDeltaTlog_raymer)
+        QWidget.setTabOrder(self.addTableWyllie, self.inputDeltaTlog_raymer)
         QWidget.setTabOrder(self.inputDeltaTlog_raymer, self.inputDeltaTma_raymer)
         QWidget.setTabOrder(self.inputDeltaTma_raymer, self.calculateRaymerPorosity)
         QWidget.setTabOrder(self.calculateRaymerPorosity, self.resultRaymerPerc)
         QWidget.setTabOrder(self.resultRaymerPerc, self.resultRaymerDec)
         QWidget.setTabOrder(self.resultRaymerDec, self.addTableRaymer)
-        QWidget.setTabOrder(self.addTableRaymer, self.outputTableSonicPorosity)
+        QWidget.setTabOrder(self.addTableRaymer, self.toVolumeUnitOuput)
+        QWidget.setTabOrder(self.toVolumeUnitOuput, self.fromPressureInput)
+        QWidget.setTabOrder(self.fromPressureInput, self.toPressureOutput)
+        QWidget.setTabOrder(self.toPressureOutput, self.porosityTabWidget)
+        QWidget.setTabOrder(self.porosityTabWidget, self.matrixDensityInput)
+        QWidget.setTabOrder(self.matrixDensityInput, self.bulkFormationDensityInput)
+        QWidget.setTabOrder(self.bulkFormationDensityInput, self.fluidDensityInput)
+        QWidget.setTabOrder(self.fluidDensityInput, self.calculateDensityLogPorosity)
+        QWidget.setTabOrder(self.calculateDensityLogPorosity, self.resultDensityPorosityDec)
+        QWidget.setTabOrder(self.resultDensityPorosityDec, self.resultDensityPorosityPerc)
+        QWidget.setTabOrder(self.resultDensityPorosityPerc, self.chooseNeutronDensityModel)
+        QWidget.setTabOrder(self.chooseNeutronDensityModel, self.neutronLogPorosityInput)
+        QWidget.setTabOrder(self.neutronLogPorosityInput, self.densityLogPorosityInput)
+        QWidget.setTabOrder(self.densityLogPorosityInput, self.calculateNeutronDensityGas)
+        QWidget.setTabOrder(self.calculateNeutronDensityGas, self.resultNeutronDensityPorosityDec)
+        QWidget.setTabOrder(self.resultNeutronDensityPorosityDec, self.resultNeutronDensityPorositPerc)
+        QWidget.setTabOrder(self.resultNeutronDensityPorositPerc, self.addTableDensityPorosity)
+        QWidget.setTabOrder(self.addTableDensityPorosity, self.outputTableSonicPorosity)
         QWidget.setTabOrder(self.outputTableSonicPorosity, self.exportPorosityTable)
-        QWidget.setTabOrder(self.exportPorosityTable, self.conversionScrollArea)
-        QWidget.setTabOrder(self.conversionScrollArea, self.fromDistanceInput)
-        QWidget.setTabOrder(self.fromDistanceInput, self.toDistanceOutput)
-        QWidget.setTabOrder(self.toDistanceOutput, self.fromDistanceUnitInput)
-        QWidget.setTabOrder(self.fromDistanceUnitInput, self.toDistanceUnitOutput)
-        QWidget.setTabOrder(self.toDistanceUnitOutput, self.fromAreaUnitInput)
-        QWidget.setTabOrder(self.fromAreaUnitInput, self.fromAreaInput)
-        QWidget.setTabOrder(self.fromAreaInput, self.toAreaOutput)
+        QWidget.setTabOrder(self.exportPorosityTable, self.GRlogInput)
+        QWidget.setTabOrder(self.GRlogInput, self.GRminInput)
+        QWidget.setTabOrder(self.GRminInput, self.GRmaxInput)
+        QWidget.setTabOrder(self.GRmaxInput, self.outputIGR)
+        QWidget.setTabOrder(self.outputIGR, self.shaleVolumeMethodInput)
+        QWidget.setTabOrder(self.shaleVolumeMethodInput, self.calculateShaleVolumeGeneral)
+        QWidget.setTabOrder(self.calculateShaleVolumeGeneral, self.shaleVolumeOutputDec)
+        QWidget.setTabOrder(self.shaleVolumeOutputDec, self.shaleVolumeOutputPerc)
+        QWidget.setTabOrder(self.shaleVolumeOutputPerc, self.methodSPInput)
+        QWidget.setTabOrder(self.methodSPInput, self.PSPInput)
+        QWidget.setTabOrder(self.PSPInput, self.SSPInput)
+        QWidget.setTabOrder(self.SSPInput, self.SPshaleInput)
+        QWidget.setTabOrder(self.SPshaleInput, self.calculateShaleVolumeSP)
+        QWidget.setTabOrder(self.calculateShaleVolumeSP, self.spOutputDec)
+        QWidget.setTabOrder(self.spOutputDec, self.spOutputPerc)
+        QWidget.setTabOrder(self.spOutputPerc, self.pushButton_2)
+        QWidget.setTabOrder(self.pushButton_2, self.scrollArea_2)
+        QWidget.setTabOrder(self.scrollArea_2, self.toPressureUnitOutput)
+        QWidget.setTabOrder(self.toPressureUnitOutput, self.fromDistanceInput)
+        QWidget.setTabOrder(self.fromDistanceInput, self.tabWidget)
+        QWidget.setTabOrder(self.tabWidget, self.toDistanceOutput)
+        QWidget.setTabOrder(self.toDistanceOutput, self.conversionScrollArea)
+        QWidget.setTabOrder(self.conversionScrollArea, self.toAreaOutput)
         QWidget.setTabOrder(self.toAreaOutput, self.toAreaUnitOutput)
-        QWidget.setTabOrder(self.toAreaUnitOutput, self.fromVolumeUnitInput)
-        QWidget.setTabOrder(self.fromVolumeUnitInput, self.fromVolumeInput)
-        QWidget.setTabOrder(self.fromVolumeInput, self.toVolumeOutput)
-        QWidget.setTabOrder(self.toVolumeOutput, self.toVolumeUnitOuput)
-        QWidget.setTabOrder(self.toVolumeUnitOuput, self.toPressureOutput)
-        QWidget.setTabOrder(self.toPressureOutput, self.fromPressureInput)
-        QWidget.setTabOrder(self.fromPressureInput, self.fromPressureUnitInput)
-        QWidget.setTabOrder(self.fromPressureUnitInput, self.toPressureUnitOutput)
+        QWidget.setTabOrder(self.toAreaUnitOutput, self.fromDistanceUnitInput)
+        QWidget.setTabOrder(self.fromDistanceUnitInput, self.fromPressureUnitInput)
+        QWidget.setTabOrder(self.fromPressureUnitInput, self.toDistanceUnitOutput)
+        QWidget.setTabOrder(self.toDistanceUnitOutput, self.scrollArea)
+        QWidget.setTabOrder(self.scrollArea, self.fromAreaInput)
+        QWidget.setTabOrder(self.fromAreaInput, self.toVolumeOutput)
+        QWidget.setTabOrder(self.toVolumeOutput, self.fromVolumeInput)
+        QWidget.setTabOrder(self.fromVolumeInput, self.fromVolumeUnitInput)
+        QWidget.setTabOrder(self.fromVolumeUnitInput, self.fromAreaUnitInput)
+        QWidget.setTabOrder(self.fromAreaUnitInput, self.tableView)
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(0)
-        self.porosityTabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(4)
+        self.porosityTabWidget.setCurrentIndex(1)
         self.stackedWidget.setCurrentIndex(0)
 
 
@@ -777,6 +1059,39 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPermeability), QCoreApplication.translate("MainWindow", u"Permeability", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Resistivity", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Water Saturation", None))
+        self.groupBox_31.setTitle(QCoreApplication.translate("MainWindow", u"Shale Volume using different methods", None))
+        self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Using Spoteaneous Potential", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"Choose a method:", None))
+        self.methodSPInput.setItemText(0, QCoreApplication.translate("MainWindow", u"Standard", None))
+        self.methodSPInput.setItemText(1, QCoreApplication.translate("MainWindow", u"Alternative", None))
+
+        self.label_25.setText(QCoreApplication.translate("MainWindow", u"PSP", None))
+        self.label_26.setText(QCoreApplication.translate("MainWindow", u"SSP", None))
+        self.SSPInput.setPlaceholderText(QCoreApplication.translate("MainWindow", u"mV", None))
+        self.PSPInput.setPlaceholderText(QCoreApplication.translate("MainWindow", u"mV", None))
+        self.spOutputPerc.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Result (%)", None))
+        self.spOutputDec.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Result (dec)", None))
+        self.SPshaleLabel.setText(QCoreApplication.translate("MainWindow", u"SPshale", None))
+        self.calculateShaleVolumeSP.setText(QCoreApplication.translate("MainWindow", u"Calculate", None))
+        self.SPshaleInput.setPlaceholderText(QCoreApplication.translate("MainWindow", u"mV", None))
+        self.outputIGR.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Output of IGR (Decimal)", None))
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"GRlog", None))
+        self.shaleVolumeMethodInput.setItemText(0, QCoreApplication.translate("MainWindow", u"Larionov", None))
+        self.shaleVolumeMethodInput.setItemText(1, QCoreApplication.translate("MainWindow", u"Larionov - Old Rocks", None))
+        self.shaleVolumeMethodInput.setItemText(2, QCoreApplication.translate("MainWindow", u"Steiber", None))
+        self.shaleVolumeMethodInput.setItemText(3, QCoreApplication.translate("MainWindow", u"Clavier", None))
+
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Choose a method:", None))
+        self.calculateShaleVolumeGeneral.setText(QCoreApplication.translate("MainWindow", u"Calculate", None))
+        self.GRlogInput.setPlaceholderText(QCoreApplication.translate("MainWindow", u"API", None))
+        self.GRminInput.setPlaceholderText(QCoreApplication.translate("MainWindow", u"API", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"GRmin", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"GRmax", None))
+        self.shaleVolumeOutputDec.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Result (dec)", None))
+        self.shaleVolumeOutputPerc.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Result (%)", None))
+        self.GRmaxInput.setPlaceholderText(QCoreApplication.translate("MainWindow", u"API", None))
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"IGR:", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Add to the Table", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("MainWindow", u"Shale Volume", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("MainWindow", u"Reserves", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600;\">Distance</span></p></body></html>", None))

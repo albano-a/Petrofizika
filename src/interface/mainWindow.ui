@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>959</width>
-    <height>784</height>
+    <height>787</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <property name="tabBarAutoHide">
        <bool>true</bool>
@@ -54,7 +54,7 @@
            <enum>QTabWidget::Triangular</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -697,7 +697,7 @@
              <x>0</x>
              <y>0</y>
              <width>915</width>
-             <height>300</height>
+             <height>303</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -749,6 +749,480 @@
        <attribute name="title">
         <string>Shale Volume</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Shale Volume using different methods</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Using Spoteaneous Potential</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <item>
+               <layout class="QGridLayout" name="gridLayout_13">
+                <item row="0" column="0" alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_24">
+                  <property name="text">
+                   <string>Choose a method:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>methodSPInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="methodSPInput">
+                  <item>
+                   <property name="text">
+                    <string>Standard</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Alternative</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="1" column="0" alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="label_25">
+                  <property name="text">
+                   <string>PSP</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>PSPInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1" alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="label_26">
+                  <property name="text">
+                   <string>SSP</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>SSPInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="SSPInput">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>mV</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLineEdit" name="PSPInput">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>mV</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="1">
+                 <widget class="QLineEdit" name="spOutputPerc">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Result (%)</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QLineEdit" name="spOutputDec">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Result (dec)</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="SPshaleLabel">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string>SPshale</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>SPshaleInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0" colspan="2">
+                 <widget class="QPushButton" name="calculateShaleVolumeSP">
+                  <property name="text">
+                   <string>Calculate</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0" colspan="2">
+                 <widget class="QLineEdit" name="SPshaleInput">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>mV</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QFrame" name="frame_3">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <layout class="QGridLayout" name="gridLayout_12">
+                <item row="7" column="1">
+                 <widget class="QLineEdit" name="outputIGR">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Output of IGR (Decimal)</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0" alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="label_13">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>GRlog</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>GRlogInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QComboBox" name="shaleVolumeMethodInput">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="minimumContentsLength">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Larionov</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Larionov - Old Rocks</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Steiber</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Clavier</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="8" column="0" alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_11">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Choose a method:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>shaleVolumeMethodInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="0" colspan="2">
+                 <widget class="QPushButton" name="calculateShaleVolumeGeneral">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Calculate</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0" colspan="2">
+                 <widget class="Line" name="line_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLineEdit" name="GRlogInput">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>API</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="GRminInput">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>API</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1" alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="label_14">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>GRmin</string>
+                  </property>
+                  <property name="margin">
+                   <number>0</number>
+                  </property>
+                  <property name="indent">
+                   <number>-1</number>
+                  </property>
+                  <property name="buddy">
+                   <cstring>GRminInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0" colspan="2" alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="label_22">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>GRmax</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>GRmaxInput</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="12" column="0">
+                 <widget class="QLineEdit" name="shaleVolumeOutputDec">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Result (dec)</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="12" column="1">
+                 <widget class="QLineEdit" name="shaleVolumeOutputPerc">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Result (%)</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0" colspan="2">
+                 <widget class="QLineEdit" name="GRmaxInput">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="placeholderText">
+                   <string>API</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0" alignment="Qt::AlignRight">
+                 <widget class="QLabel" name="label_23">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>IGR:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>outputIGR</cstring>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Add to the Table</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frame_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_12">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_2">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>895</width>
+                <height>321</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <property name="spacing">
+                <number>6</number>
+               </property>
+               <property name="leftMargin">
+                <number>2</number>
+               </property>
+               <property name="topMargin">
+                <number>2</number>
+               </property>
+               <property name="rightMargin">
+                <number>2</number>
+               </property>
+               <property name="bottomMargin">
+                <number>2</number>
+               </property>
+               <item>
+                <widget class="QTableView" name="tableView">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -771,7 +1245,7 @@
              <x>0</x>
              <y>0</y>
              <width>915</width>
-             <height>679</height>
+             <height>682</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1190,8 +1664,6 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
-  <tabstop>porosityTabWidget</tabstop>
   <tabstop>inputDeltaTlog_wyllie</tabstop>
   <tabstop>inputDeltaTma_wyllie</tabstop>
   <tabstop>inputDeltaTfl_wyllie</tabstop>
@@ -1199,32 +1671,65 @@
   <tabstop>resultWylliePerc</tabstop>
   <tabstop>resultWyllieDec</tabstop>
   <tabstop>addTableWyllie</tabstop>
-  <tabstop>scrollArea</tabstop>
   <tabstop>inputDeltaTlog_raymer</tabstop>
   <tabstop>inputDeltaTma_raymer</tabstop>
   <tabstop>calculateRaymerPorosity</tabstop>
   <tabstop>resultRaymerPerc</tabstop>
   <tabstop>resultRaymerDec</tabstop>
   <tabstop>addTableRaymer</tabstop>
+  <tabstop>toVolumeUnitOuput</tabstop>
+  <tabstop>fromPressureInput</tabstop>
+  <tabstop>toPressureOutput</tabstop>
+  <tabstop>porosityTabWidget</tabstop>
+  <tabstop>matrixDensityInput</tabstop>
+  <tabstop>bulkFormationDensityInput</tabstop>
+  <tabstop>fluidDensityInput</tabstop>
+  <tabstop>calculateDensityLogPorosity</tabstop>
+  <tabstop>resultDensityPorosityDec</tabstop>
+  <tabstop>resultDensityPorosityPerc</tabstop>
+  <tabstop>chooseNeutronDensityModel</tabstop>
+  <tabstop>neutronLogPorosityInput</tabstop>
+  <tabstop>densityLogPorosityInput</tabstop>
+  <tabstop>calculateNeutronDensityGas</tabstop>
+  <tabstop>resultNeutronDensityPorosityDec</tabstop>
+  <tabstop>resultNeutronDensityPorositPerc</tabstop>
+  <tabstop>addTableDensityPorosity</tabstop>
   <tabstop>outputTableSonicPorosity</tabstop>
   <tabstop>exportPorosityTable</tabstop>
-  <tabstop>conversionScrollArea</tabstop>
+  <tabstop>GRlogInput</tabstop>
+  <tabstop>GRminInput</tabstop>
+  <tabstop>GRmaxInput</tabstop>
+  <tabstop>outputIGR</tabstop>
+  <tabstop>shaleVolumeMethodInput</tabstop>
+  <tabstop>calculateShaleVolumeGeneral</tabstop>
+  <tabstop>shaleVolumeOutputDec</tabstop>
+  <tabstop>shaleVolumeOutputPerc</tabstop>
+  <tabstop>methodSPInput</tabstop>
+  <tabstop>PSPInput</tabstop>
+  <tabstop>SSPInput</tabstop>
+  <tabstop>SPshaleInput</tabstop>
+  <tabstop>calculateShaleVolumeSP</tabstop>
+  <tabstop>spOutputDec</tabstop>
+  <tabstop>spOutputPerc</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>scrollArea_2</tabstop>
+  <tabstop>toPressureUnitOutput</tabstop>
   <tabstop>fromDistanceInput</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>toDistanceOutput</tabstop>
-  <tabstop>fromDistanceUnitInput</tabstop>
-  <tabstop>toDistanceUnitOutput</tabstop>
-  <tabstop>fromAreaUnitInput</tabstop>
-  <tabstop>fromAreaInput</tabstop>
+  <tabstop>conversionScrollArea</tabstop>
   <tabstop>toAreaOutput</tabstop>
   <tabstop>toAreaUnitOutput</tabstop>
-  <tabstop>fromVolumeUnitInput</tabstop>
-  <tabstop>fromVolumeInput</tabstop>
-  <tabstop>toVolumeOutput</tabstop>
-  <tabstop>toVolumeUnitOuput</tabstop>
-  <tabstop>toPressureOutput</tabstop>
-  <tabstop>fromPressureInput</tabstop>
+  <tabstop>fromDistanceUnitInput</tabstop>
   <tabstop>fromPressureUnitInput</tabstop>
-  <tabstop>toPressureUnitOutput</tabstop>
+  <tabstop>toDistanceUnitOutput</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>fromAreaInput</tabstop>
+  <tabstop>toVolumeOutput</tabstop>
+  <tabstop>fromVolumeInput</tabstop>
+  <tabstop>fromVolumeUnitInput</tabstop>
+  <tabstop>fromAreaUnitInput</tabstop>
+  <tabstop>tableView</tabstop>
  </tabstops>
  <resources/>
  <connections/>

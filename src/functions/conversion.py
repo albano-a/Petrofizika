@@ -59,7 +59,9 @@ class Conversion_gas_industry:
             }
 
             try:
-                return distance * conversion_factors[from_unit][to_unit]
+                if conversion_factors[from_unit][to_unit] is None:
+                    raise ValueError(f"Cannot convert from {from_unit} to {to_unit}.")
+                return f"{distance * conversion_factors[from_unit][to_unit]:.4f}"
             except KeyError:
                 raise ValueError(
                     "Invalid unit. Must be one of the following: 'feet', 'meters', 'miles', 'kilometers'.")
@@ -117,7 +119,9 @@ class Conversion_gas_industry:
             }
 
             try:
-                return area * conversion_factors[from_unit][to_unit]
+                if conversion_factors[from_unit][to_unit] is None:
+                    raise ValueError(f"Cannot convert from {from_unit} to {to_unit}.")
+                return f"{area * conversion_factors[from_unit][to_unit]:.4f}"
             except KeyError:
                 raise ValueError(
                     "Invalid unit. Must be one of the following: 'acres', 'square feet', 'square meters', 'square kilometers'.")
@@ -197,7 +201,9 @@ class Conversion_gas_industry:
             }
 
             try:
-                return volume * conversion_factors[from_unit][to_unit]
+                if conversion_factors[from_unit][to_unit] is None:
+                    raise ValueError(f"Cannot convert from {from_unit} to {to_unit}.")
+                return f"{volume * conversion_factors[from_unit][to_unit]:.4f}"
             except KeyError:
                 raise ValueError("Invalid unit. Must be one of the following: 'acre-feet', 'barrels', 'cubic feet', 'cubic meters', 'gallons', 'metric tons'.")
         
@@ -232,42 +238,43 @@ class Conversion_gas_industry:
             """
             conversion_factors = {
                 'psia': {
-                    'kPa': 6.89476, 
+                    'kpa': 6.89476, 
                     'bar': 0.0689476, 
                     'BTU': None, 
                     'joules': None
                     },
-                'kPa': {
+                'kpa': {
                     'psia': 1/6.89476, 
                     'bar': 0.01, 
-                    'BTU': None, 
+                    'btu': None, 
                     'joules': None
                     },
                 'bar': {
                     'psia': 14.5038, 
-                    'kPa': 100, 
-                    'BTU': None, 
+                    'kpa': 100, 
+                    'btu': None, 
                     'joules': None
                     },
-                'BTU': {
+                'btu': {
                     'psia': None, 
-                    'kPa': None, 
+                    'kpa': None, 
                     'bar': None, 
                     'joules': 1055.06
                     },
                 'joules': {
                     'psia': None, 
-                    'kPa': None, 
+                    'kpa': None, 
                     'bar': None, 
-                    'BTU': 1/1055.06
+                    'btu': 1/1055.06
                     }
             }
 
             try:
                 if conversion_factors[from_unit][to_unit] is None:
                     raise ValueError(f"Cannot convert from {from_unit} to {to_unit}.")
-                return value * conversion_factors[from_unit][to_unit]
+                return f"{value * conversion_factors[from_unit][to_unit]:.4f}"
             except KeyError:
-                raise ValueError("Invalid unit. Must be one of the following: 'psia', 'kPa', 'bar', 'BTU', 'joules'.")
+                raise ValueError(
+                    "Invalid unit. Must be one of the following: 'psia', 'kPa', 'bar', 'BTU', 'joules'.")
 
 

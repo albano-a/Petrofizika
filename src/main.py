@@ -21,6 +21,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Petrofizika")
         
+        ## Porosity > Sonic
         self.calculateWylliePorosity.clicked.connect(
             lambda: self.calculate_porosity_sonic('wyllie')
         )
@@ -33,32 +34,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.addTableRaymer.clicked.connect(
             lambda: self.add_table_sonic('raymer')
         )
-        self.exportSonicPorosityTable.clicked.connect(self.export_table)
+        self.exportPorosityTable.clicked.connect(self.export_table)
+        
+        ## Porosity > Density
+        self.calculateDensityLogPorosity.clicked.connect(
+            lambda: self.calculate_porosity_density('density')
+        )
+        self.calculateNeutronDensityGas.clicked.connect(
+            lambda: self.calculate_porosity_density('neutron-density')
+        )
         
         ### Conversions
         self.conversion = Conversion_gas_industry()
         self.fromDistanceInput.textChanged.connect(self.conversionDistance)
         self.fromAreaInput.textChanged.connect(self.conversionArea)
+        self.fromVolumeInput.textChanged.connect(self.conversionVolume)
+        self.fromPressureInput.textChanged.connect(self.conversionPressure)
         
     def conversionDistance(self, _=None):
-        dict_translation = {
-            'pés': 'feet',
-            'metros': 'meters',
-            'milhas': 'miles',
-            'quilômetros': 'kilometers'
-        }
-        
         distance_text = self.fromDistanceInput.text()
         if distance_text:
             distance = float(distance_text)
         else:
             distance = 0.0  # or any other default value
-        from_unit = self.distanceSelector1.currentText().lower()
-        to_unit = self.distanceSelector2.currentText().lower()
-        
-        # Translate the units from Portuguese to English
-        from_unit = dict_translation[from_unit]
-        to_unit = dict_translation[to_unit]
+        from_unit = self.fromDistanceUnitInput.currentText().lower()
+        to_unit = self.toDistanceUnitOutput.currentText().lower()
         
         distance_class = self.conversion.Distance()
         converted_distance = distance_class.convert_distance(
@@ -67,23 +67,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.toDistanceOutput.setText(str(converted_distance))
         
     def conversionArea(self, _=None):
-        dict_translation = {
-            'pés quadrados': 'square feet',
-            'metros quadrados': 'square meters',
-            'hectares': 'hectares',
-            'acres': 'acres'
-        }
         area_text = self.fromAreaInput.text()
         if area_text:
             area = float(area_text)
         else:
             area = 0.0  # or any other default value
-        from_unit = self.areaSelector1.currentText().lower()
-        to_unit = self.areaSelector2.currentText().lower()
-        
-        # Translate the units from Portuguese to English
-        from_unit = dict_translation[from_unit]
-        to_unit = dict_translation[to_unit]
+        from_unit = self.fromAreaUnitInput.currentText().lower()
+        to_unit = self.toAreaUnitOutput.currentText().lower()
         
         area_class = self.conversion.Area()
         converted_area = area_class.convert_area(
@@ -91,7 +81,36 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         )
         self.toAreaOutput.setText(str(converted_area))
         
+    def conversionVolume(self, _=None):
+        volume_text = self.fromVolumeInput.text()
+        if volume_text:
+            volume = float(volume_text)
+        else:
+            volume = 0.0
+        from_unit = self.fromVolumeUnitInput.currentText().lower()
+        to_unit = self.toVolumeUnitOuput.currentText().lower()
         
+        volume_class = self.conversion.Volume()
+        converted_volume = volume_class.convert_volume(
+            volume=volume, from_unit=from_unit, to_unit=to_unit
+        )
+        self.toVolumeOutput.setText(str(converted_volume))
+    
+    def conversionPressure(self, _=None):
+        pressure_text = self.fromPressureInput.text()
+        if pressure_text:
+            pressure = float(pressure_text)
+        else:
+            pressure = 0.0
+        from_unit = self.fromPressureUnitInput.currentText().lower()
+        to_unit = self.toPressureUnitOutput.currentText().lower()
+        
+        pressure_class = self.conversion.Pressure()
+        converted_pressure = pressure_class.convert_pressure_energy(
+            value=pressure, from_unit=from_unit, to_unit=to_unit
+        )
+        self.toPressureOutput.setText(str(converted_pressure))
+    
     def calculate_porosity_sonic(self, model):
         t_log = float(self.inputDeltaTlog_wyllie.text())
         t_ma = float(self.inputDeltaTma_wyllie.text())
@@ -106,11 +125,40 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             porosity, perc_porosity = sonic.porosity_raymer()
             self.resultRaymerDec.setText(f"{porosity:.4f}")
             self.resultRaymerPerc.setText(f"{perc_porosity:.2f}%")
+       
+    def calculate_porosity_density(self, type):
+        density = Density(0, 0, 0)
+        if type == 'density':
+            pma = float(self.matrixDensityInput.text())
+            pb = float(self.bulkFormationDensityInput.text())
+            pfl = float(self.fluidDensityInput.text())
+            density = Density(pma, pfl, pb)
+        
+            d_porosity, d_perc_porosity = density.density_log()
+            self.resultDensityPorosityDec.setText(f"{d_porosity:.4f}")
+            self.resultDensityPorosityPerc.setText(f"{d_perc_porosity:.2f}%")
+        if type == 'neutron-density':
+            phi_n = float(self.neutronLogPorosityInput.text())
+            phi_d = float(self.densityLogPorosityInput.text())
+            if self.chooseNeutronDensityModel.currentText() == 'Standard Model':
+                nd_porosity, nd_perc_porosity = density.neutron_density_combination(
+                    phi_n, phi_d, model='standard'
+                    )
+            elif self.chooseNeutronDensityModel.currentText() == 'Alternative Model':
+                nd_porosity, nd_perc_porosity = density.neutron_density_combination(
+                    phi_n, phi_d, model='alternative'
+                    )
+            
+            self.resultNeutronDensityPorosityDec.setText(f"{nd_porosity:.4f}")
+            self.resultNeutronDensityPorositPerc.setText(f"{nd_perc_porosity:.2f}%")
+            
+        
         
     def add_table_sonic(self, model):
         t_log = float(self.inputDeltaTlog_wyllie.text())
         t_ma = float(self.inputDeltaTma_wyllie.text())
-        sonic = Sonic(t_log, t_ma)
+        t_fl = float(self.inputDeltaTfl_wyllie.text())
+        sonic = Sonic(t_log, t_ma, t_fl)
 
         if model == 'wyllie': 
             t_fl = float(self.inputDeltaTfl_wyllie.text())

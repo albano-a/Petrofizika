@@ -89,7 +89,8 @@ class Density:
         
         return rho_log, perc_rho_log
     
-    def neutron_density_combination(self, phi_n, phi_d) -> float:
+    
+    def neutron_density_combination(self, phi_n, phi_d, model='standard') -> float:
         """
         Neutron-density combination.
         
@@ -108,10 +109,14 @@ class Density:
         
         return: Neutron-density porosity (g/cm³)
         """
-        phi_ndgas = np.sqrt((phi_n**2 + phi_d**2) / 2)
+        if model == 'standard':
+            phi_ndgas = np.sqrt((phi_n**2 + phi_d**2) / 2)
+        elif model == 'alternative':
+            phi_ndgas = (1/3)*phi_n + (2/3)*phi_d
+            
         perc_phi_ndgas = np.clip(phi_ndgas, 0, 1) * 100
         
-        return phi_ndgas, perc_phi_ndgas	
+        return phi_ndgas, perc_phi_ndgas
     
     
 class Resistivity:
@@ -283,4 +288,8 @@ class ShaleCorrected:
 
         return phi_corrected, perc_phi_corrected
     
-    
+
+### TESTS AREA ###
+
+#density = Density(2.71, 2.50, 0.85)
+#print(density.density_log())

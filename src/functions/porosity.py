@@ -168,11 +168,119 @@ class Resistivity:
         Sw = water saturation of the uninvaded zone
         m= cementation exponent
         Rmf= resistivity of the mud filtrate at formation temperature
-        Rxo= shallow resistivity from a very shallow reading device such as lateolog-8, microspherically focused log, or microlaterolog
+        Rxo= shallow resistivity from a very shallow reading device such as lateolog-8, 
+        microspherically focused log, or microlaterolog
         """
         
         phi_fz: float = ((self.a * self.rmf) / (self.rxo * (self.sw**self.n))) ** (1/self.m)
         perc_phi_fz: float = np.clip(phi_fz, 0, 1) * 100
         
+        if phi_fz < 0 or phi_fz > 1 or perc_phi_fz < 0 or perc_phi_fz > 100:
+            QMessageBox.critical(None, "Resultado Inválido", 
+                                 "Os valores calculados estão fora de escala!")
+            return None, None
+
         return phi_fz, perc_phi_fz
+
+class ShaleCorrected:
+    def __init__(self, vshale):
+        self.vshale = vshale
         
+    def sonic_porosity_sc(self, t_log, t_ma, t_fl, t_sh) -> float:
+        """
+        Dresser Atlas (1979) created an equation to calculate the shale corrected sonic 
+        derived porosity, using Wyllie (et al., 1958) equation as the basement, 
+        and considering the shale volume and sonic porosity in a nearby shale values. 
+        
+        ɸSe= effective (shale-corrected) sonic porosity
+        ɸS= sonic porosity
+        ɸSsh= sonic porosity in a nearby shale
+        Vshale= shale volume
+        Δtlog= interval transit time of the formation (from the sonic log)
+        Δtma= matrix interval transit time
+        Δtfl= fluid interval transit time
+        Δtsh= interval transit time in a nearby shale
+        """
+        term_1 = ( ((t_log - t_ma)*(100)) / ((t_fl - t_ma)*(t_sh)) )
+        term_2 = self.vshale * ((t_sh - t_ma)/(t_fl - t_ma))
+        
+        phi_se = term_1 - term_2
+        perc_phi_se: float = np.clip(phi_se, 0, 1) * 100
+        
+        return phi_se, perc_phi_se
+    
+    def schlumberger_shale_corrected(self, phi, phi_shale, porosity_type) -> float:
+        """
+        Calculate the shale corrected porosity - Schlumberger (1985).
+
+        This function calculates the shale corrected porosity for the given porosity type 
+        (neutron, density, or sonic) using the given porosity and the porosity in a nearby shale. 
+
+        Parameters
+        ----------
+        phi: 
+            Porosity (decimal)
+        phi_shale: 
+            Porosity in a nearby shale (decimal)
+        porosity_type: 
+            Type of porosity ('neutron', 'density', or 'sonic')
+
+        Return
+        ------
+        phi_corrected:
+            Shale corrected porosity (decimal) 
+        perc_phi_corrected:    
+            Shale corrected porosity (%)
+        """
+
+        if porosity_type == 'neutron':
+            correction_factor = 0.03
+        elif porosity_type == 'density':
+            correction_factor = 0.13
+        else:
+            QMessageBox.critical(None, 
+                                 "Entrada inválida", 
+                                 "Tipo de porosidade deve ser 'neutron' ou 'density'.")
+            return None, None
+
+        phi_corrected = phi - ((phi_shale/0.45) * correction_factor * self.vshale)
+        perc_phi_corrected = np.clip(phi_corrected, 0, 1) * 100
+
+        if phi_corrected < 0 or phi_corrected > 1 or perc_phi_corrected < 0 or perc_phi_corrected > 100:
+            QMessageBox.critical(None, "Resultado inválido", 
+                                 "Os valores calculados estão fora de escala.")
+            return None, None
+
+        return phi_corrected, perc_phi_corrected
+    
+    def dewan_shale_corrected(self, phi, phi_shale) -> float:
+        """
+        Calculates the Dewan (1983) corrections for porosity derived from
+        density, neutron and sonic.
+        
+        Parameters
+        ----------
+        phi:
+            Porosity log for density, neutron and sonic
+        phi_shale:
+            Porosity log in a nearby shale
+
+        Return
+        ------
+        phi_corrected:
+            Shale corrected porosity (decimal) 
+        perc_phi_corrected:    
+            Shale corrected porosity (%)    
+        """
+        
+        phi_corrected = phi - self.vshale * phi_shale
+        perc_phi_corrected = np.clip(phi_corrected, 0, 1) * 100
+        
+        if phi_corrected < 0 or phi_corrected > 1 or perc_phi_corrected < 0 or perc_phi_corrected > 100:
+            QMessageBox.critical(None, "Resultado inválido", 
+                                 "Os valores calculados estão fora de escala.")
+            return None, None
+
+        return phi_corrected, perc_phi_corrected
+    
+    

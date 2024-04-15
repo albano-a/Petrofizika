@@ -11,7 +11,8 @@ from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
 import pandas as pd
 from interface.mainWindow_ui import Ui_MainWindow
-from functions.porosity.porosities import Sonic
+from functions.porosity import Sonic, Density, Resistivity, ShaleCorrected
+from functions.conversion import Conversion_gas_industry
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -33,6 +34,63 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             lambda: self.add_table_sonic('raymer')
         )
         self.exportSonicPorosityTable.clicked.connect(self.export_table)
+        
+        ### Conversions
+        self.conversion = Conversion_gas_industry()
+        self.fromDistanceInput.textChanged.connect(self.conversionDistance)
+        self.fromAreaInput.textChanged.connect(self.conversionArea)
+        
+    def conversionDistance(self, _=None):
+        dict_translation = {
+            'pés': 'feet',
+            'metros': 'meters',
+            'milhas': 'miles',
+            'quilômetros': 'kilometers'
+        }
+        
+        distance_text = self.fromDistanceInput.text()
+        if distance_text:
+            distance = float(distance_text)
+        else:
+            distance = 0.0  # or any other default value
+        from_unit = self.distanceSelector1.currentText().lower()
+        to_unit = self.distanceSelector2.currentText().lower()
+        
+        # Translate the units from Portuguese to English
+        from_unit = dict_translation[from_unit]
+        to_unit = dict_translation[to_unit]
+        
+        distance_class = self.conversion.Distance()
+        converted_distance = distance_class.convert_distance(
+            distance=distance, from_unit=from_unit, to_unit=to_unit
+        )
+        self.toDistanceOutput.setText(str(converted_distance))
+        
+    def conversionArea(self, _=None):
+        dict_translation = {
+            'pés quadrados': 'square feet',
+            'metros quadrados': 'square meters',
+            'hectares': 'hectares',
+            'acres': 'acres'
+        }
+        area_text = self.fromAreaInput.text()
+        if area_text:
+            area = float(area_text)
+        else:
+            area = 0.0  # or any other default value
+        from_unit = self.areaSelector1.currentText().lower()
+        to_unit = self.areaSelector2.currentText().lower()
+        
+        # Translate the units from Portuguese to English
+        from_unit = dict_translation[from_unit]
+        to_unit = dict_translation[to_unit]
+        
+        area_class = self.conversion.Area()
+        converted_area = area_class.convert_area(
+            area=area, from_unit=from_unit, to_unit=to_unit
+        )
+        self.toAreaOutput.setText(str(converted_area))
+        
         
     def calculate_porosity_sonic(self, model):
         t_log = float(self.inputDeltaTlog_wyllie.text())
@@ -129,6 +187,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     break
                 df.to_excel(filename, index=False, header=True)
      
+     
+    
 def main():
     app = QApplication(sys.argv)
     window = MainWindow()

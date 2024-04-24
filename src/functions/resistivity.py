@@ -1,16 +1,17 @@
 import numpy as np
 from PySide6.QtWidgets import QMessageBox
 
+
 class Resistivity:
     def __init__(self) -> None:
         pass
-    
+
     def water_resistivity_archie(self, ro, phi, m, a) -> float:
         """
         Calculate water resistivity using Archie's Law.
 
         This function implements Archie's Law for the calculation of water resistivity.
-        It uses the resistivity of the formation (`ro`), the porosity (`phi`), 
+        It uses the resistivity of the formation (`ro`), the porosity (`phi`),
         the cementation exponent (`m`), and the tortuosity factor (`a`).
 
         Parameters
@@ -38,36 +39,39 @@ class Resistivity:
         """
         try:
             rw = (ro * phi**m) / a
-            
+
             return rw
-        
+
         except ZeroDivisionError:
-            QMessageBox.critical(None, 
-                                "Erro de divisão por zero", 
-                                "O fator de tortuosidade (a) não pode ser zero.")
+            QMessageBox.critical(
+                None,
+                "Erro de divisão por zero",
+                "O fator de tortuosidade (a) não pode ser zero.",
+            )
             return None, None
 
         except Exception as e:
-            QMessageBox.critical(None, 
-                                "Erro desconhecido", 
-                                f"Ocorreu um erro desconhecido: {str(e)}")
+            QMessageBox.critical(
+                None, "Erro desconhecido", f"Ocorreu um erro desconhecido: {str(e)}"
+            )
             return None, None
-        
-    def water_resistivity_western_atlas(self, 
-                                        bht, # Bottom Hole Temperature
-                                        fd, # Formation depth
-                                        td, # Total Depth
-                                        amst, # Annual Mean Surface Temperature
-                                        tsurf, # measured temperature of rmf
-                                        rmfsurf, # resistivity of mud filtrate at measured temperature
-                                        sp, # Spoteaneous Potential measurement
-                                        ) -> float:
+
+    def water_resistivity_western_atlas(
+        self,
+        bht,  # Bottom Hole Temperature
+        fd,  # Formation depth
+        td,  # Total Depth
+        amst,  # Annual Mean Surface Temperature
+        tsurf,  # measured temperature of rmf
+        rmfsurf,  # resistivity of mud filtrate at measured temperature
+        sp,  # Spoteaneous Potential measurement
+    ) -> float:
         """
         Calculate water resistivity using the Western Atlas method.
 
         This function implements the Western Atlas method for the calculation of water resistivity.
-        It uses the bottom hole temperature (`bht`), formation depth (`fd`), total depth (`td`), 
-        annual mean surface temperature (`amst`), measured temperature of rmf (`tsurf`), 
+        It uses the bottom hole temperature (`bht`), formation depth (`fd`), total depth (`td`),
+        annual mean surface temperature (`amst`), measured temperature of rmf (`tsurf`),
         resistivity of mud filtrate at measured temperature (`rmfsurf`), and spontaneous potential measurement (`sp`).
 
         Parameters
@@ -90,7 +94,7 @@ class Resistivity:
         Returns
         -------
         tuple
-            Water resistivity (`rw`), equivalent water resistivity (`rwe`), mud filtrate resistivity (`rmf`), 
+            Water resistivity (`rw`), equivalent water resistivity (`rwe`), mud filtrate resistivity (`rmf`),
             and formation temperature (`tf`), all in ohm.m.
 
         Raises
@@ -101,27 +105,27 @@ class Resistivity:
             If an unknown error occurs during the calculation.
         """
         try:
-            tf = (((bht - amst)/(td)) * fd) + amst
+            tf = (((bht - amst) / (td)) * fd) + amst
             rmf = (rmfsurf * (tsurf + 6.77)) / (tf + 6.77)
-            rwe = rmf * 10 ** (sp / (61 + 0.133*bht))
-            rw_num = rwe + 0.131 * 10 ** ((1/(np.log(bht/19.9))) - 2)
-            rw_den = -0.5 * rwe + 10 ** ((0.0426)/(np.log(bht/50.8)))
+            rwe = rmf * 10 ** (sp / (61 + 0.133 * bht))
+            rw_num = rwe + 0.131 * 10 ** ((1 / (np.log(bht / 19.9))) - 2)
+            rw_den = -0.5 * rwe + 10 ** ((0.0426) / (np.log(bht / 50.8)))
             rw = rw_num / rw_den
-            
+
             return rw, rwe, rmf, tf
-        
+
         except ZeroDivisionError:
-            QMessageBox.critical(None, 
-                                "Erro de divisão por zero", 
-                                "Ocorreu uma divisão por zero!")
+            QMessageBox.critical(
+                None, "Erro de divisão por zero", "Ocorreu uma divisão por zero!"
+            )
             return None, None
 
         except Exception as e:
-            QMessageBox.critical(None, 
-                                "Erro desconhecido", 
-                                f"Ocorreu um erro desconhecido: {str(e)}")
+            QMessageBox.critical(
+                None, "Erro desconhecido", f"Ocorreu um erro desconhecido: {str(e)}"
+            )
             return None, None
-        
+
     def water_resistivity_sp(self, sp, tf, rmf) -> float:
         """
         Calculate water resistivity using the spontaneous potential (SP) method.
@@ -150,16 +154,16 @@ class Resistivity:
         """
         try:
             K = (0.133 * tf) + 60
-            rw = 10 ** ((K * np.log(rmf) + sp)/K)
-        
+            rw = 10 ** ((K * np.log(rmf) + sp) / K)
+
             return rw
-        
+
         except Exception as e:
-            QMessageBox.critical(None, 
-                                "Erro desconhecido", 
-                                f"Ocorreu um erro desconhecido: {str(e)}")
+            QMessageBox.critical(
+                None, "Erro desconhecido", f"Ocorreu um erro desconhecido: {str(e)}"
+            )
             return None, None
-        
+
     def apparent_water_resistivity_archie(self, rt, phi, m, a) -> float:
         """
         Calculate apparent water resistivity using Archie's Law.
@@ -192,39 +196,39 @@ class Resistivity:
             If an unknown error occurs during the calculation.
         """
         try:
-            rwa = (rt * (phi ** m)) / a
-            
+            rwa = (rt * (phi**m)) / a
+
             return rwa
-        
+
         except ZeroDivisionError:
-            QMessageBox.critical(None, 
-                                "Erro de divisão por zero", 
-                                "O fator de tortuosidade (a) não pode ser zero.")
+            QMessageBox.critical(
+                None,
+                "Erro de divisão por zero",
+                "O fator de tortuosidade (a) não pode ser zero.",
+            )
             return None, None
 
         except Exception as e:
-            QMessageBox.critical(None, 
-                                "Erro desconhecido", 
-                                f"Ocorreu um erro desconhecido: {str(e)}")
+            QMessageBox.critical(
+                None, "Erro desconhecido", f"Ocorreu um erro desconhecido: {str(e)}"
+            )
             return None, None
-    
+
     def total_resistivity_archie(self, a, rw, phi, m, n, sw) -> float:
-        """
-        
-        """
+        """ """
         try:
             rt = (a * rw) / ((phi**m) * (sw**n))
-            
+
             return rt
-        
+
         except ZeroDivisionError:
-            QMessageBox.critical(None, 
-                                "Erro de divisão por zero", 
-                                "Houve divisão por zero!")
+            QMessageBox.critical(
+                None, "Erro de divisão por zero", "Houve divisão por zero!"
+            )
             return None, None
 
         except Exception as e:
-            QMessageBox.critical(None, 
-                                "Erro desconhecido", 
-                                f"Ocorreu um erro desconhecido: {str(e)}")
+            QMessageBox.critical(
+                None, "Erro desconhecido", f"Ocorreu um erro desconhecido: {str(e)}"
+            )
             return None, None
